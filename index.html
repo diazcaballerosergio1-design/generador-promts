@@ -10,16 +10,28 @@
     <div class="container">
         <header>
             <h1>Generador Multifuncional de Prompts</h1>
-            <p>Crea prompts profesionales e hiper-enfocados para cualquier IA (ChatGPT, Claude, Gemini, NotebookLM, etc.).</p>
+            <p>Crea prompts profesionales e hiper-enfocados para cualquier inteligencia artificial.</p>
         </header>
 
         <main>
-            <!-- Selector de Categoría Principal -->
+            <!-- Selector de la IA de Destino -->
             <div class="form-group">
-                <label for="categorySelect">Selecciona el Área de Trabajo:</label>
+                <label for="aiSelect">🤖 ¿Para qué IA o plataforma está destinado?</label>
+                <select id="aiSelect" onchange="actualizarPromptFinal()">
+                    <option value="ChatGPT">ChatGPT (OpenAI)</option>
+                    <option value="Claude">Claude (Anthropic)</option>
+                    <option value="Gemini">Gemini (Google)</option>
+                    <option value="NotebookLM">NotebookLM (Google)</option>
+                    <option value="Canva">Canva AI (Diseño y Creatividad)</option>
+                    <option value="Otra">Otra plataforma / IA general</option>
+                </select>
+            </div>
+
+            <!-- Selector de Área de Trabajo -->
+            <div class="form-group">
+                <label for="categorySelect">💼 Selecciona el Área de Trabajo:</label>
                 <select id="categorySelect" onchange="actualizarCampos()">
                     <option value="redes">📱 Redes Sociales y Contenido</option>
-                    <option value="imagen">🖼️ Análisis y Mejora de Imágenes</option>
                     <option value="freelance">💼 Trabajo Freelance y Negocios</option>
                     <option value="oficios">🔧 Oficios y Servicios Técnicos</option>
                     <option value="estrategia">🎯 Estrategia y Planificación</option>
@@ -29,11 +41,11 @@
                 </select>
             </div>
 
-            <!-- Campo libre para escribir cualquier profesión, oficio o rol -->
+            <!-- Campo libre para el Rol, Profesión u Oficio -->
             <div class="form-group">
                 <label for="inputProfesion">¿Qué rol, profesión u oficio adoptará la IA? (Libre elección):</label>
-                <input type="text" id="inputProfesion" placeholder="Ej. Electricista automotriz, Abogado corporativo, Diseñador de interiores, Chef ejecutivo...">
-                <small style="color: #64748b; font-size: 0.85rem; margin-top: 4px; display: block;">Escribe el rol que prefieras; la IA ajustará su perspectiva, lenguaje y enfoque a este perfil.</small>
+                <input type="text" id="inputProfesion" placeholder="Ej. Electricista, Diseñador Gráfico, Abogado, Community Manager, Carpintero...">
+                <small style="color: #64748b; font-size: 0.85rem; margin-top: 4px; display: block;">Escribe el rol que desees para calibrar la perspectiva y el tono de la respuesta.</small>
             </div>
 
             <!-- Contenedor dinámico según la categoría -->
@@ -41,8 +53,27 @@
                 <!-- Se rellena vía JavaScript -->
             </div>
 
+            <!-- Opción Adicional y Opcional para Imágenes -->
+            <div class="form-group optional-section" style="background: #f1f5f9; padding: 15px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 0;">
+                    <input type="checkbox" id="checkImagen" onchange="toggleSeccionImagen()" style="width: auto;">
+                    <span>🖼️ Incluir análisis, mejora o generación de imagen (Opcional)</span>
+                </label>
+                
+                <div id="imagenCampos" style="display: none; margin-top: 12px;">
+                    <div style="margin-bottom: 10px;">
+                        <label for="tipoImagen">Tipo de imagen o diseño:</label>
+                        <input type="text" id="tipoImagen" placeholder="Ej. Fotografía de producto, plantilla de Canva, diagrama, boceto" oninput="actualizarPromptFinal()">
+                    </div>
+                    <div>
+                        <label for="guiaMejora">Guía o aspecto visual a mejorar:</label>
+                        <textarea id="guiaMejora" rows="2" placeholder="Ej. Mejorar iluminación, optimizar distribución, verificar diseño visual" oninput="actualizarPromptFinal()"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <!-- Sección de Salida y Botones Interactivos -->
-            <div class="form-group output-section">
+            <div class="form-group output-section" style="margin-top: 20px;">
                 <label for="outputPrompt">Prompt Generado Optimizado:</label>
                 <textarea id="outputPrompt" readonly rows="8"></textarea>
                 
