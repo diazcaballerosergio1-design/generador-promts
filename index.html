@@ -10,15 +10,18 @@
     <div class="container">
         <header>
             <h1>Generador Multifuncional de Prompts</h1>
-            <p>Selecciona una categoría profesional, personaliza los campos y obtén un prompt optimizado para cualquier IA (ChatGPT, Claude, Gemini, NotebookLM, etc.).</p>
+            <p>Crea prompts profesionales e hiper-enfocados para cualquier IA (ChatGPT, Claude, Gemini, NotebookLM, etc.).</p>
         </header>
 
         <main>
+            <!-- Selector de Categoría Principal -->
             <div class="form-group">
-                <label for="categorySelect">Selecciona la Categoría:</label>
+                <label for="categorySelect">Selecciona el Área de Trabajo:</label>
                 <select id="categorySelect" onchange="actualizarCampos()">
                     <option value="redes">📱 Redes Sociales y Contenido</option>
+                    <option value="imagen">🖼️ Análisis y Mejora de Imágenes</option>
                     <option value="freelance">💼 Trabajo Freelance y Negocios</option>
+                    <option value="oficios">🔧 Oficios y Servicios Técnicos</option>
                     <option value="estrategia">🎯 Estrategia y Planificación</option>
                     <option value="analisis">📊 Análisis de Datos y Documentos</option>
                     <option value="codigo">💻 Desarrollo y Tecnología</option>
@@ -26,15 +29,27 @@
                 </select>
             </div>
 
-            <!-- Contenedor dinámico para los campos según la categoría -->
-            <div id="dynamicFields" class="form-group">
-                <!-- Se llena mediante JavaScript -->
+            <!-- Campo libre para escribir cualquier profesión, oficio o rol -->
+            <div class="form-group">
+                <label for="inputProfesion">¿Qué rol, profesión u oficio adoptará la IA? (Libre elección):</label>
+                <input type="text" id="inputProfesion" placeholder="Ej. Electricista automotriz, Abogado corporativo, Diseñador de interiores, Chef ejecutivo...">
+                <small style="color: #64748b; font-size: 0.85rem; margin-top: 4px; display: block;">Escribe el rol que prefieras; la IA ajustará su perspectiva, lenguaje y enfoque a este perfil.</small>
             </div>
 
-            <div class="form-group">
-                <label for="outputPrompt">Prompt Generado:</label>
+            <!-- Contenedor dinámico según la categoría -->
+            <div id="dynamicFields">
+                <!-- Se rellena vía JavaScript -->
+            </div>
+
+            <!-- Sección de Salida y Botones Interactivos -->
+            <div class="form-group output-section">
+                <label for="outputPrompt">Prompt Generado Optimizado:</label>
                 <textarea id="outputPrompt" readonly rows="8"></textarea>
-                <button id="copyBtn" onclick="copiarPrompt()">Copiar al Portapapeles</button>
+                
+                <div class="button-group">
+                    <button id="copyBtn" class="btn-primary" onclick="copiarPrompt()">📋 Copiar Prompt</button>
+                    <button id="clearBtn" class="btn-secondary" onclick="limpiarCampos()">🧹 Limpiar Campos</button>
+                </div>
             </div>
         </main>
     </div>
