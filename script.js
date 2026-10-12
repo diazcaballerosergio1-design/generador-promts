@@ -1,78 +1,119 @@
 const plantillas = {
     redes: {
-        titulo: "📱 Redes Sociales y Creación de Contenido",
+        titulo: "📱 Redes Sociales y Contenido",
         campos: [
-            { id: "plataforma", label: "Plataforma de destino:", tipo: "input", placeholder: "Ej. Instagram, TikTok, LinkedIn, YouTube, X (Twitter)" },
-            { id: "formato", label: "Formato de contenido:", tipo: "input", placeholder: "Ej. Guion para reel/short, Hilo educativo, Post carrusel, Copy publicitario" },
-            { id: "objetivoRedes", label: "Objetivo y mensaje principal:", tipo: "textarea", placeholder: "Ej. Generar interacción, educar sobre un tema, promocionar un servicio o producto" },
-            { id: "tonoRedes", label: "Tono de voz:", tipo: "input", placeholder: "Ej. Cercano y divertido, profesional y analítico, inspirador" }
+            { id: "plataforma", label: "Plataforma de destino:", tipo: "input", placeholder: "Ej. Facebook, Instagram, TikTok, LinkedIn, YouTube, X" },
+            { id: "formato", label: "Formato de contenido:", tipo: "input", placeholder: "Ej. Post carrusel, Reel, Story, Artículo de blog, Video largo" },
+            { id: "objetivoRedes", label: "Objetivo y mensaje central:", tipo: "textarea", placeholder: "Ej. Generar interacción, educar sobre un servicio, captar clientes potenciales" },
+            { id: "tonoRedes", label: "Tono de voz:", tipo: "input", placeholder: "Ej. Cercano y amigable, profesional y analítico, persuasivo" }
         ],
-        generar: (vals) => `Actúa como un Content Creator y Social Media Manager experto en crecimiento orgánico en ${vals.plataforma || '[Plataforma]'}.
+        generar: (vals, profesion) => `Actúa como un experto en comunicación y marketing digital en ${vals.plataforma || '[Plataforma]'}. Tu perfil y enfoque profesional es el de: ${profesion || 'Creador de Contenido y Especialista'}.
 
 ### Objetivo y Contexto:
 ${vals.objetivoRedes || '[Describe el mensaje central o producto a promocionar]'}
 
 ### Parámetros de la Publicación:
+- **Plataforma:** ${vals.plataforma || '[Plataforma]'}
 - **Formato:** ${vals.formato || '[Formato de contenido]'}
 - **Tono de voz:** ${vals.tonoRedes || '[Tono deseado]'}
 
 ### Estructura de Respuesta Requerida:
-1. **Ganancia de atención (Hook):** Las primeras líneas o segundos clave para enganchar a la audiencia.
-2. **Cuerpo del mensaje:** Desarrollo ágil, estructurado con espacios y fácil de leer.
-3. **Llamado a la Acción (CTA):** Instrucción clara para que el usuario comente, comparta o haga clic.
-4. **Sugerencia de Hashtags / Palabras clave:** Listado optimizado para el algoritmo.`
+1. **Ganancia de atención (Hook):** Las primeras líneas o segundos clave adaptados al algoritmo de ${vals.plataforma || 'la red social'}.
+2. **Cuerpo del mensaje:** Desarrollo ágil, estructurado con espacios, viñetas y fácil lectura.
+3. **Llamado a la Acción (CTA):** Instrucción clara para orientar a la audiencia.
+4. **Sugerencia de Hashtags / Palabras clave:** Listado optimizado.`
+    },
+
+    imagen: {
+        titulo: "🖼️ Análisis y Mejora de Imágenes",
+        campos: [
+            { id: "tipoImagen", label: "Tipo de imagen a analizar:", tipo: "input", placeholder: "Ej. Fotografía de producto, diseño gráfico, diagrama técnico, boceto" },
+            { id: "guiaMejora", label: "¿Qué guía o aspecto deseas mejorar?", tipo: "textarea", placeholder: "Ej. Mejorar iluminación, corregir composición, verificar proporciones, optimizar diseño UI/UX" },
+            { id: "resultadoEsperado", label: "Objetivo visual final:", tipo: "input", placeholder: "Ej. Estilo minimalista profesional, aspecto más comercial, mayor claridad técnica" }
+        ],
+        generar: (vals, profesion) => `Actúa como un Evaluador Visual y Diseñador experto, operando bajo la perspectiva profesional de un/a ${profesion || 'Especialista en la materia'}.
+
+### Contexto de la Imagen:
+Analiza la imagen adjunta teniendo en cuenta que es un/a ${vals.tipoImagen || '[Tipo de imagen]'}.
+
+### Guía de Análisis y Mejora:
+${vals.guiaMejora || '[Describe qué aspectos evaluar o corregir]'}
+
+### Meta Visual:
+${vals.resultadoEsperado || '[Objetivo visual deseado]'}
+
+### Estructura de Respuesta Requerida:
+1. **Diagnóstico visual:** Evaluación crítica de los puntos fuertes y debilidades actuales.
+2. **Propuesta de mejora paso a paso:** Ajustes concretos de color, composición, iluminación o elementos técnicos.
+3. **Prompt alternativo para generación (si aplica):** Instrucción precisa para regenerar o corregir la imagen mediante herramientas de IA.`
+    },
+
+    oficios: {
+        titulo: "🔧 Oficios, Reparación y Servicios Técnicos",
+        campos: [
+            { id: "tipoServicio", label: "Ámbito u oficio específico:", tipo: "input", placeholder: "Ej. Electricidad, mecánica, carpintería, fontanería, cerrajería, electrónica" },
+            { id: "problemaTecnico", label: "Descripción del problema o tarea:", tipo: "textarea", placeholder: "Ej. Diagnóstico de componentes, pasos para ensamblar una pieza, solución de fallas..." },
+            { id: "herramientas", label: "Herramientas o materiales disponibles:", tipo: "input", placeholder: "Ej. Multímetro, soldador, herramientas manuales básicas" }
+        ],
+        generar: (vals, profesion) => `Actúa como un Maestro Senior y Especialista en ${vals.tipoServicio || 'oficios técnicos'}, aplicando los conocimientos y rigor de un/a ${profesion || 'Profesional experto'}.
+
+### Situación / Problema a Resolver:
+${vals.problemaTecnico || '[Describe detalladamente el problema o trabajo a realizar]'}
+
+### Recursos Disponibles:
+- ${vals.herramientas || 'Herramientas estándar del sector'}
+
+### Estructura de Respuesta Requerida:
+1. **Evaluación de seguridad y precauciones:** Advertencias críticas antes de manipular equipos o materiales.
+2. **Guía de acción paso a paso:** Procedimiento claro, lógico y metódico.
+3. **Consejos profesionales (Tips del oficio):** Buenas prácticas para garantizar un resultado duradero y de calidad.`
     },
 
     freelance: {
-        titulo: "💼 Trabajo Freelance y Propuestas Comerciales",
+        titulo: "💼 Trabajo Freelance y Negocios",
         campos: [
-            { id: "tipoServicio", label: "Servicio o propuesta:", tipo: "input", placeholder: "Ej. Presupuesto para diseño web, propuesta de consultoría, respuesta a cliente difícil" },
-            { id: "detallesNegocio", label: "Detalles del proyecto o situación:", tipo: "textarea", placeholder: "Ej. El cliente quiere negociar un descuento del 30% en servicios de marketing..." },
-            { id: "objetivoFreelance", label: "Resultado que buscas obtener:", tipo: "input", placeholder: "Ej. Cerrar el contrato al precio fijado manteniendo una relación cordial" }
+            { id: "tipoServicio", label: "Propuesta o situación comercial:", tipo: "input", placeholder: "Ej. Presupuesto de servicios, propuesta de valor, negociación de tarifas" },
+            { id: "detallesNegocio", label: "Detalles del cliente o proyecto:", tipo: "textarea", placeholder: "Ej. El cliente solicita un presupuesto ajustado pero exige entregas rápidas..." },
+            { id: "objetivoFreelance", label: "Resultado que buscas obtener:", tipo: "input", placeholder: "Ej. Cerrar el contrato manteniendo tarifas justas y profesionalismo" }
         ],
-        generar: (vals) => `Actúa como un Consultor de Negocios y Freelancer Senior con amplia experiencia en negociación y gestión de clientes.
+        generar: (vals, profesion) => `Actúa como un Consultor de Negocios y Profesional Independiente experto en negociación, respaldado por tu experiencia como ${profesion || 'Especialista en servicios'}.
 
 ### Situación / Proyecto:
 ${vals.detallesNegocio || '[Describe el contexto, correo recibido o propuesta a redactar]'}
 
-### Tipo de Gestión:
-- **Área:** ${vals.tipoServicio || '[Servicio o negociación]'}
+### Parámetros:
+- **Área:** ${vals.tipoServicio || '[Negociación / Propuesta]'}
 - **Meta:** ${vals.objetivoFreelance || '[Objetivo principal]'}
 
 ### Estructura de Respuesta Requerida:
-1. **Estrategia de comunicación:** Breve consejo de cómo abordar psicológicamente al cliente.
-2. **Plantilla de mensaje lista para usar:** Redacción profesional, persuasiva y adaptada al contexto (incluyendo espacios editables entre corchetes si es necesario).`
+1. **Estrategia de comunicación:** Enfoque psicológico y comercial recomendado.
+2. **Plantilla de mensaje lista para usar:** Redacción persuasiva, educada y profesional.`
     },
 
-    codigo: {
-        titulo: "💻 Desarrollo y Tecnología",
+    estrategia: {
+        titulo: "🎯 Estrategia, Planificación y Proyectos",
         campos: [
-            { id: "lenguaje", label: "Tecnología / Lenguaje / Framework:", tipo: "input", placeholder: "Ej. Python, Flask, SQLite, JavaScript, Automatización" },
-            { id: "objetivo", label: "¿Qué necesitas construir o solucionar?", tipo: "textarea", placeholder: "Ej. Crear un script que automatice tareas o solucione un error..." },
-            { id: "restricciones", label: "Restricciones técnicas:", tipo: "input", placeholder: "Ej. Sin dependencias externas, código modular y limpio" }
+            { id: "reto", label: "Describe el problema o meta a planificar:", tipo: "textarea", placeholder: "Ej. Diseñar un plan operativo para lanzar un nuevo servicio digital..." },
+            { id: "enfoque", label: "Metodología o enfoque deseado:", tipo: "input", placeholder: "Ej. Enfoque ágil, análisis DAFO, optimización de tiempos y recursos" }
         ],
-        generar: (vals) => `Actúa como un Ingeniero de Software Senior experto en ${vals.lenguaje || '[Tecnología]'}. 
+        generar: (vals, profesion) => `Actúa como un Consultor Estratégico y Planificador Senior con amplia experiencia en ${vals.enfoque || 'gestión de proyectos'}, enfocado desde la perspectiva experta de un/a ${profesion || 'Especialista'}.
 
-### Contexto y Objetivo:
-${vals.objetivo || '[Describe tu tarea o error detalladamente]'}
-
-### Restricciones Técnicas:
-- ${vals.restricciones || 'Ninguna restricción adicional'}
-- Sigue estrictamente las mejores prácticas de la industria y principios de código limpio.
+### Reto o Meta a Abordar:
+${vals.reto || '[Describe tu objetivo o problema]'}
 
 ### Estructura de Respuesta Requerida:
-1. Breve explicación técnica de la solución.
-2. Bloque de código completo, optimizado y comentado.
-3. Posibles casos de fallo o advertencias de seguridad a tener en cuenta.`
+1. **Diagnóstico inicial:** Perspectiva analítica del reto.
+2. **Plan de acción paso a paso:** Fases cronológicas o hitos claros.
+3. **Mitigación de riesgos:** Posibles obstáculos y soluciones preventivas.`
     },
 
     analisis: {
-        titulo: "📊 Análisis de Datos y Documentos (Ideal para NotebookLM/Claude)",
+        titulo: "📊 Análisis de Datos y Documentos",
         campos: [
-            { id: "fuenteDatos", label: "Información o contexto a analizar:", tipo: "textarea", placeholder: "Pega fragmentos de informes, notas de investigación o registros..." },
-            { id: "preguntaClave", label: "Pregunta o análisis específico:", tipo: "textarea", placeholder: "Ej. Extrae los puntos críticos y genera una tabla comparativa..." }
+            { id: "fuenteDatos", label: "Información o contexto a analizar:", tipo: "textarea", placeholder: "Pega fragmentos de informes, notas o registros..." },
+            { id: "preguntaClave", label: "Pregunta o análisis específico:", tipo: "textarea", placeholder: "Ej. Extrae los puntos críticos y genera conclusiones prácticas..." }
         ],
-        generar: (vals) => `Actúa como un Analista e Investigador Experto. Utiliza únicamente la información provista en el contexto para realizar la siguiente tarea, sin asumir datos externos que no estén respaldados.
+        generar: (vals, profesion) => `Actúa como un Analista e Investigador Experto trabajando como ${profesion || 'Especialista en la materia'}. Utiliza estrictamente la información provista en el contexto.
 
 ### Contexto / Datos de Entrada:
 ${vals.fuenteDatos || '[Inserta aquí los datos, fragmentos o notas]'}
@@ -85,38 +126,43 @@ ${vals.preguntaClave || '[Indica qué deseas encontrar o analizar]'}
 - Sé preciso, objetivo y directo al grano.`
     },
 
+    codigo: {
+        titulo: "💻 Desarrollo y Tecnología",
+        campos: [
+            { id: "lenguaje", label: "Tecnología / Lenguaje / Framework:", tipo: "input", placeholder: "Ej. Python, Flask, SQLite, JavaScript, Automatización" },
+            { id: "objetivo", label: "¿Qué necesitas construir o solucionar?", tipo: "textarea", placeholder: "Ej. Crear un script que automatice tareas o solucione un error..." },
+            { id: "restricciones", label: "Restricciones técnicas:", tipo: "input", placeholder: "Ej. Sin dependencias externas, código modular y limpio" }
+        ],
+        generar: (vals, profesion) => `Actúa como un Ingeniero y Desarrollador Senior experto en ${vals.lenguaje || '[Tecnología]'}, combinando tu experiencia técnica como ${profesion || 'Especialista en software'}. 
+
+### Contexto y Objetivo:
+${vals.objetivo || '[Describe tu tarea o error detalladamente]'}
+
+### Restricciones Técnicas:
+- ${vals.restricciones || 'Ninguna restricción adicional'}
+- Sigue estrictamente las mejores prácticas de código limpio.
+
+### Estructura de Respuesta Requerida:
+1. Breve explicación técnica de la solución.
+2. Bloque de código completo, optimizado y comentado.
+3. Posibles casos de fallo o advertencias.`
+    },
+
     traduccion: {
         titulo: "🌍 Traducción y Localización Profesional",
         campos: [
             { id: "idiomaOrigen", label: "Idioma de origen y destino:", tipo: "input", placeholder: "Ej. De inglés técnico a español latino" },
-            { id: "contextoTexto", label: "Dominio o contexto del texto:", tipo: "input", placeholder: "Ej. Documentación comercial, contrato, marketing, manual técnico" },
+            { id: "contextoTexto", label: "Dominio o contexto del texto:", tipo: "input", placeholder: "Ej. Documentación comercial, manual técnico, marketing" },
             { id: "textoOriginal", label: "Texto a traducir:", tipo: "textarea", placeholder: "Pega aquí el texto que necesitas traducir..." }
         ],
-        generar: (vals) => `Actúa como un Traductor Profesional y Localizador experto en ${vals.contextoTexto || '[Dominio general]'}. 
+        generar: (vals, profesion) => `Actúa como un Traductor Profesional y Localizador experto trabajando con el perfil de ${profesion || 'Especialista lingüístico'}. 
 
 ### Instrucciones de Traducción:
-- Traduce el siguiente texto de forma precisa ${vals.idiomaOrigen || '[Idioma origen a destino]'}.
-- Adapta los modismos y expresiones para que suenen naturales en el idioma de llegada sin perder el sentido original.
+- Traduce el texto de forma precisa ${vals.idiomaOrigen || '[Idioma origen a destino]'}.
+- Adapta los modismos y expresiones para que suenen naturales en el idioma de llegada.
 
 ### Texto a Traducir:
 ${vals.textoOriginal || '[Inserta el texto aquí]'}`
-    },
-
-    estrategia: {
-        titulo: "🎯 Estrategia, Planificación y Negocios",
-        campos: [
-            { id: "reto", label: "Describe el problema o meta a planificar:", tipo: "textarea", placeholder: "Ej. Diseñar un plan de marketing para lanzar un servicio digital..." },
-            { id: "enfoque", label: "Metodología o enfoque deseado:", tipo: "input", placeholder: "Ej. Enfoque ágil, análisis DAFO, optimización de recursos" }
-        ],
-        generar: (vals) => `Actúa como un Consultor Estratégico y Project Manager Senior con experiencia en ${vals.enfoque || 'resolución de problemas complejos'}.
-
-### Reto o Meta a Abordar:
-${vals.reto || '[Describe tu objetivo o problema]'}
-
-### Estructura de Respuesta Requerida:
-1. **Diagnóstico inicial:** Breve perspectiva del reto.
-2. **Plan de acción paso a paso:** Fases cronológicas o hitos claros.
-3. **Identificación de riesgos:** Posibles obstáculos y cómo mitigarlos de forma preventiva.`
     }
 };
 
@@ -129,7 +175,7 @@ function actualizarCampos() {
 
     config.campos.forEach(campo => {
         const div = document.createElement('div');
-        div.style.marginBottom = '15px';
+        div.className = 'form-group';
 
         const label = document.createElement('label');
         label.innerText = campo.label;
@@ -158,6 +204,7 @@ function actualizarCampos() {
 function actualizarPromptFinal() {
     const categoria = document.getElementById('categorySelect').value;
     const config = plantillas[categoria];
+    const profesion = document.getElementById('inputProfesion').value;
     const valores = {};
 
     config.campos.forEach(campo => {
@@ -165,7 +212,7 @@ function actualizarPromptFinal() {
         valores[campo.id] = el ? el.value : '';
     });
 
-    document.getElementById('outputPrompt').value = config.generar(valores);
+    document.getElementById('outputPrompt').value = config.generar(valores, profesion);
 }
 
 function copiarPrompt() {
@@ -174,10 +221,26 @@ function copiarPrompt() {
     navigator.clipboard.writeText(texto.value);
     
     const btn = document.getElementById('copyBtn');
-    btn.innerText = '¡Prompt copiado al portapapeles!';
+    const originalText = btn.innerText;
+    btn.innerText = '¡Copiado con éxito! ✅';
+    btn.style.backgroundColor = '#16a34a';
+    
     setTimeout(() => {
-        btn.innerText = 'Copiar al Portapapeles';
+        btn.innerText = originalText;
+        btn.style.backgroundColor = '';
     }, 2000);
 }
 
-window.onload = actualizarCampos;
+function limpiarCampos() {
+    const inputs = document.querySelectorAll('#dynamicFields input, #dynamicFields textarea, #inputProfesion');
+    inputs.forEach(input => {
+        input.value = '';
+    });
+    actualizarPromptFinal();
+}
+
+// Inicializar al cargar la página
+window.onload = () => {
+    actualizarCampos();
+    document.getElementById('inputProfesion').addEventListener('input', actualizarPromptFinal);
+};
