@@ -1,10 +1,55 @@
 const plantillas = {
-    codigo: {
-        titulo: "Desarrollo y Depuración de Código",
+    redes: {
+        titulo: "📱 Redes Sociales y Creación de Contenido",
         campos: [
-            { id: "lenguaje", label: "Tecnología / Lenguaje / Framework:", tipo: "input", placeholder: "Ej. Python, Flask, SQLite, JavaScript" },
-            { id: "objetivo", label: "¿Qué necesitas construir o solucionar?", tipo: "textarea", placeholder: "Ej. Crear un endpoint que reciba parámetros y los valide" },
-            { id: "restricciones", label: "Restricciones técnicas:", tipo: "input", placeholder: "Ej. Sin dependencias externas, código modular" }
+            { id: "plataforma", label: "Plataforma de destino:", tipo: "input", placeholder: "Ej. Instagram, TikTok, LinkedIn, YouTube, X (Twitter)" },
+            { id: "formato", label: "Formato de contenido:", tipo: "input", placeholder: "Ej. Guion para reel/short, Hilo educativo, Post carrusel, Copy publicitario" },
+            { id: "objetivoRedes", label: "Objetivo y mensaje principal:", tipo: "textarea", placeholder: "Ej. Generar interacción, educar sobre un tema, promocionar un servicio o producto" },
+            { id: "tonoRedes", label: "Tono de voz:", tipo: "input", placeholder: "Ej. Cercano y divertido, profesional y analítico, inspirador" }
+        ],
+        generar: (vals) => `Actúa como un Content Creator y Social Media Manager experto en crecimiento orgánico en ${vals.plataforma || '[Plataforma]'}.
+
+### Objetivo y Contexto:
+${vals.objetivoRedes || '[Describe el mensaje central o producto a promocionar]'}
+
+### Parámetros de la Publicación:
+- **Formato:** ${vals.formato || '[Formato de contenido]'}
+- **Tono de voz:** ${vals.tonoRedes || '[Tono deseado]'}
+
+### Estructura de Respuesta Requerida:
+1. **Ganancia de atención (Hook):** Las primeras líneas o segundos clave para enganchar a la audiencia.
+2. **Cuerpo del mensaje:** Desarrollo ágil, estructurado con espacios y fácil de leer.
+3. **Llamado a la Acción (CTA):** Instrucción clara para que el usuario comente, comparta o haga clic.
+4. **Sugerencia de Hashtags / Palabras clave:** Listado optimizado para el algoritmo.`
+    },
+
+    freelance: {
+        titulo: "💼 Trabajo Freelance y Propuestas Comerciales",
+        campos: [
+            { id: "tipoServicio", label: "Servicio o propuesta:", tipo: "input", placeholder: "Ej. Presupuesto para diseño web, propuesta de consultoría, respuesta a cliente difícil" },
+            { id: "detallesNegocio", label: "Detalles del proyecto o situación:", tipo: "textarea", placeholder: "Ej. El cliente quiere negociar un descuento del 30% en servicios de marketing..." },
+            { id: "objetivoFreelance", label: "Resultado que buscas obtener:", tipo: "input", placeholder: "Ej. Cerrar el contrato al precio fijado manteniendo una relación cordial" }
+        ],
+        generar: (vals) => `Actúa como un Consultor de Negocios y Freelancer Senior con amplia experiencia en negociación y gestión de clientes.
+
+### Situación / Proyecto:
+${vals.detallesNegocio || '[Describe el contexto, correo recibido o propuesta a redactar]'}
+
+### Tipo de Gestión:
+- **Área:** ${vals.tipoServicio || '[Servicio o negociación]'}
+- **Meta:** ${vals.objetivoFreelance || '[Objetivo principal]'}
+
+### Estructura de Respuesta Requerida:
+1. **Estrategia de comunicación:** Breve consejo de cómo abordar psicológicamente al cliente.
+2. **Plantilla de mensaje lista para usar:** Redacción profesional, persuasiva y adaptada al contexto (incluyendo espacios editables entre corchetes si es necesario).`
+    },
+
+    codigo: {
+        titulo: "💻 Desarrollo y Tecnología",
+        campos: [
+            { id: "lenguaje", label: "Tecnología / Lenguaje / Framework:", tipo: "input", placeholder: "Ej. Python, Flask, SQLite, JavaScript, Automatización" },
+            { id: "objetivo", label: "¿Qué necesitas construir o solucionar?", tipo: "textarea", placeholder: "Ej. Crear un script que automatice tareas o solucione un error..." },
+            { id: "restricciones", label: "Restricciones técnicas:", tipo: "input", placeholder: "Ej. Sin dependencias externas, código modular y limpio" }
         ],
         generar: (vals) => `Actúa como un Ingeniero de Software Senior experto en ${vals.lenguaje || '[Tecnología]'}. 
 
@@ -17,15 +62,15 @@ ${vals.objetivo || '[Describe tu tarea o error detalladamente]'}
 
 ### Estructura de Respuesta Requerida:
 1. Breve explicación técnica de la solución.
-2. Bloque de código completo, optimizado y comentado (listo para probar).
+2. Bloque de código completo, optimizado y comentado.
 3. Posibles casos de fallo o advertencias de seguridad a tener en cuenta.`
     },
 
     analisis: {
-        titulo: "Análisis de Documentos / Datos (Ideal para NotebookLM y Claude)",
+        titulo: "📊 Análisis de Datos y Documentos (Ideal para NotebookLM/Claude)",
         campos: [
-            { id: "fuenteDatos", label: "Tipo de información o contexto a analizar:", tipo: "textarea", placeholder: "Ej. Fragmentos de manuales técnicos, notas de investigación o registros de bases de datos" },
-            { id: "preguntaClave", label: "Pregunta o análisis específico:", tipo: "textarea", placeholder: "Ej. Extrae los puntos críticos de falla y cómo solucionarlos" }
+            { id: "fuenteDatos", label: "Información o contexto a analizar:", tipo: "textarea", placeholder: "Pega fragmentos de informes, notas de investigación o registros..." },
+            { id: "preguntaClave", label: "Pregunta o análisis específico:", tipo: "textarea", placeholder: "Ej. Extrae los puntos críticos y genera una tabla comparativa..." }
         ],
         generar: (vals) => `Actúa como un Analista e Investigador Experto. Utiliza únicamente la información provista en el contexto para realizar la siguiente tarea, sin asumir datos externos que no estén respaldados.
 
@@ -40,67 +85,28 @@ ${vals.preguntaClave || '[Indica qué deseas encontrar o analizar]'}
 - Sé preciso, objetivo y directo al grano.`
     },
 
-    creativo: {
-        titulo: "Creación de Contenido y Redacción",
-        campos: [
-            { id: "tipoContenido", label: "Formato del contenido:", tipo: "input", placeholder: "Ej. Artículo técnico, Guion, Documentación, Hilo" },
-            { id: "audiencia", label: "Audiencia o tono:", tipo: "input", placeholder: "Ej. Técnico y profesional / Didáctico y sencillo para principiantes" },
-            { id: "ideaPrincipal", label: "Idea principal o esquema:", tipo: "textarea", placeholder: "Ej. Explicar el proceso paso a paso de una reparación o flujo de software" }
-        ],
-        generar: (vals) => `Actúa como un Redactor de Contenidos Profesional especializado en comunicación técnica y divulgación.
-
-### Parámetros del Contenido:
-- **Formato:** ${vals.tipoContenido || '[Formato]'}
-- **Audiencia / Tono:** ${vals.audiencia || '[Tono deseado]'}
-
-### Idea Central / Esquema Base:
-${vals.ideaPrincipal || '[Desarrolla aquí los puntos que debe cubrir el texto]'}
-
-### Instrucciones de Estilo:
-- Evita relleno innecesario ("paja"). Ve directo a la estructura de valor.
-- Usa subtítulos claros y lenguaje persuasivo pero riguroso.`
-    },
-
     traduccion: {
-        titulo: "Traducción y Localización Técnica",
+        titulo: "🌍 Traducción y Localización Profesional",
         campos: [
             { id: "idiomaOrigen", label: "Idioma de origen y destino:", tipo: "input", placeholder: "Ej. De inglés técnico a español latino" },
-            { id: "contextoTexto", label: "Dominio o contexto del texto:", tipo: "input", placeholder: "Ej. Manual de electrónica, documentación de software, legal" },
+            { id: "contextoTexto", label: "Dominio o contexto del texto:", tipo: "input", placeholder: "Ej. Documentación comercial, contrato, marketing, manual técnico" },
             { id: "textoOriginal", label: "Texto a traducir:", tipo: "textarea", placeholder: "Pega aquí el texto que necesitas traducir..." }
         ],
-        generar: (vals) => `Actúa como un Traductor Profesional especializado en ${vals.contextoTexto || '[Dominio técnico]'}. 
+        generar: (vals) => `Actúa como un Traductor Profesional y Localizador experto en ${vals.contextoTexto || '[Dominio general]'}. 
 
 ### Instrucciones de Traducción:
 - Traduce el siguiente texto de forma precisa ${vals.idiomaOrigen || '[Idioma origen a destino]'}.
-- Mantén la terminología técnica adecuada al contexto sin realizar traducciones literales incorrectas.
-- Preserva los formatos, etiquetas o fragmentos de código si los hubiera.
+- Adapta los modismos y expresiones para que suenen naturales en el idioma de llegada sin perder el sentido original.
 
 ### Texto a Traducir:
 ${vals.textoOriginal || '[Inserta el texto aquí]'}`
     },
 
-    resumen: {
-        titulo: "Resumen y Síntesis de Información",
-        campos: [
-            { id: "longitud", label: "Formato o extensión del resumen:", tipo: "input", placeholder: "Ej. 3 conclusiones clave, viñetas cortas, resumen ejecutivo de 1 párrafo" },
-            { id: "textoLargo", label: "Texto o notas extensas:", tipo: "textarea", placeholder: "Pega aquí el texto, transcripción o notas que deseas resumir..." }
-        ],
-        generar: (vals) => `Actúa como un Asistente Ejecutivo experto en síntesis de información compleja.
-
-### Instrucciones:
-- Analiza el texto proporcionado y extrae únicamente la información de mayor valor e impacto.
-- El formato de salida debe ser: ${vals.longitud || 'Viñetas organizadas por orden de importancia'}.
-- Omite redundancias y detalles superficiales.
-
-### Texto / Notas de Entrada:
-${vals.textoLargo || '[Inserta tu texto largo aquí]'}`
-    },
-
     estrategia: {
-        titulo: "Estrategia, Planificación y Resolución de Problemas",
+        titulo: "🎯 Estrategia, Planificación y Negocios",
         campos: [
-            { id: "reto", label: "Describe el problema o meta a planificar:", tipo: "textarea", placeholder: "Ej. Diseñar un plan paso a paso para desarrollar una mini app en Flask..." },
-            { id: "enfoque", label: "Metodología o enfoque deseado:", tipo: "input", placeholder: "Ej. Enfoque ágil, análisis de riesgos, lluvia de ideas creativa" }
+            { id: "reto", label: "Describe el problema o meta a planificar:", tipo: "textarea", placeholder: "Ej. Diseñar un plan de marketing para lanzar un servicio digital..." },
+            { id: "enfoque", label: "Metodología o enfoque deseado:", tipo: "input", placeholder: "Ej. Enfoque ágil, análisis DAFO, optimización de recursos" }
         ],
         generar: (vals) => `Actúa como un Consultor Estratégico y Project Manager Senior con experiencia en ${vals.enfoque || 'resolución de problemas complejos'}.
 
